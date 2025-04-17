@@ -10,6 +10,8 @@ import { RiCloseLargeLine } from "react-icons/ri";
 import { useState } from "react";
 
 import Link from "next/link";
+
+import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 const Navbar = () => {
 
     const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -30,7 +32,14 @@ const Navbar = () => {
           <Link href={"/"} className="hover:text-green-400">About</Link>
         </ul>
 
-        <div className="flex gap-5 text-xl">
+        <div className="flex gap-5 text-xl items-center">
+
+            <SignedIn>
+                <UserButton className="text-base cursor-pointer" />
+            </SignedIn>
+            <SignedOut>
+                <SignInButton mode="modal" className="text-base cursor-pointer hover:text-green-600" />
+            </SignedOut>
           <FiUser className="hover:cursor-pointer hover:text-green-400" />
           <span className="relative">
             <FiShoppingCart className="hover:cursor-pointer hover:text-green-400" />
