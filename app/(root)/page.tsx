@@ -1,34 +1,34 @@
+"use client"
 import { Hero } from "../components/Hero";
-import Image from "next/image";
 
 type Product = {
   id: string;
   name: string;
   description?: string;
-  price: string;
+  price: number;
   image: string;
 };
 
 import { getProducts } from "@/lib/actions/products";
-export default async function Home() {
-  const products = await getProducts();
+import React, { useEffect, useState } from "react";
+import ProductCard from "../components/ProductCard";
+export default function Home() {
+  const [products, setProducts] = useState<Product[]>([])
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const products = await getProducts(); 
+      setProducts(products)
+    }
+
+    fetchProducts()
+  }, [])
   return (
     <main>
       <Hero />
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {products.map((product: Product) => (
-          <div key={product.id} className="border p-4 rounded">
-            <Image
-              src={product.image}
-              alt={product.name}
-              width={200}
-              height={200}
-              className="w-full h-40 object-cover"
-            />
-            <h2 className="text-lg font-semibold">{product.name}</h2>
-            <p>${product.price}</p>
-          </div>
-        ))}
+        { products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        )) }
       </div>
     </main>
   );

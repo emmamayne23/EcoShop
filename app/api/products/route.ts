@@ -4,11 +4,11 @@ import { prisma } from "@/lib/prisma";
 // GET all products
 export async function GET() {
   try {
-    const products = await prisma.product.findMany({})
+    const products = await prisma.product.findMany()
     return NextResponse.json(products, { status: 200 });
   } catch (error) {
     console.error("Error fetching Products", error);
-    return NextResponse.json({ message: "Could not fetch Products" }, { status: 500 });
+    return NextResponse.json({ message: "Could not fetch all the Products" }, { status: 500 });
   }
 }
 
@@ -22,7 +22,7 @@ export async function POST(request: Request) {
 
   try {
     const product = await prisma.product.create({
-      data: { name, description, price, image },
+      data: { name, description, price: parseFloat(price), image },
     });
 
     return NextResponse.json(product, { status: 201 });

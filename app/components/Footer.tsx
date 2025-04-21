@@ -1,4 +1,5 @@
-import React from "react";
+"use client"
+import React, { useState, useEffect } from "react";
 
 import { FaRegCompass } from "react-icons/fa";
 import { FaFacebookF } from "react-icons/fa";
@@ -10,6 +11,11 @@ import { IoIosArrowForward } from "react-icons/io";
 import { FaAppStore } from "react-icons/fa";
 import { FaGooglePlay } from "react-icons/fa";
 export const Footer = () => {
+  const [now, setNow] = useState<number | null>()
+  
+  useEffect(() => {
+    setNow(new Date().getFullYear())
+  }, [])
   return (
     <footer >
       <div className="p-5 sm:px-10 space-y-10 md:grid md:grid-cols-2 md:gap-5 lg:grid-cols-4">
@@ -115,7 +121,7 @@ export const Footer = () => {
       </div>
 
       <div className="border-t border-gray-600 flex items-center justify-center">
-        <p>&copy; {new Date().getFullYear()} EcoShop. All rights reserved.</p>
+        <p>&copy; {now} EcoShop. All rights reserved.</p>
       </div>
     </footer>
   );

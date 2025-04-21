@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+import { CartProvider } from "./context/CartContext";
+import { FavoritesProvider } from "./context/FavoritesContext";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -21,7 +23,11 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={montserrat.className}>{children}</body>
+        <body className={montserrat.className}>
+          <CartProvider>
+            <FavoritesProvider>{children}</FavoritesProvider>
+          </CartProvider>
+        </body>
       </html>
     </ClerkProvider>
   );
