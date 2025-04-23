@@ -6,7 +6,7 @@ import { FiShoppingCart } from "react-icons/fi";
 // import { FiUser } from "react-icons/fi";
 import { CiSearch } from "react-icons/ci";
 import { RiCloseLargeLine } from "react-icons/ri";
-import { GrFavorite } from "react-icons/gr";
+// import { GrFavorite } from "react-icons/gr";
 
 import { useState } from "react";
 import { useCart } from "../context/CartContext";
